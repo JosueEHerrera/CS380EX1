@@ -1,10 +1,7 @@
 
 import java.io.*;
 import java.net.*;
-// import java.io.InputStream;
-// import java.io.BufferedReader;
-// import java.io.InputStreamReader;
-// import java.net.Socket;
+import java.util.*;
 
 public final class EchoClient {
 
@@ -13,18 +10,26 @@ public final class EchoClient {
             InputStream is = socket.getInputStream();
             InputStreamReader isr = new InputStreamReader(is, "UTF-8");
             BufferedReader br = new BufferedReader(isr);
-           	System.out.println(br.readLine());
-
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            System.out.println("here1");
+           	
+            //System.out.println(br.readLine());
+            
+            OutputStream os = socket.getOutputStream();
+            PrintStream out = new PrintStream(os,true,"UTF-8");
+            Scanner kb = new Scanner(System.in);
            
-    		String userinput;
-	        while((userinput = br.readLine()) != null){
+    		String userinput = "";
+	        while(!userinput.equals(" ")){
+                
+                System.out.print("Client> "); 
+                userinput = kb.nextLine();
 	        	
-	        	System.out.println("here2");
-	        	out.println(userinput);
-	        	System.out.println("Client> "+ userinput);
+                out.printf(userinput);
+                userinput = br.readLine();
+                
+                 if(!userinput.equals("exit"))
+                    System.out.println("Server>"+ userinput);
 	        }
+	
         }
 
         
