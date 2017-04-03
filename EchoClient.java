@@ -10,29 +10,18 @@ public final class EchoClient {
             InputStream is = socket.getInputStream();
             InputStreamReader isr = new InputStreamReader(is, "UTF-8");
             BufferedReader br = new BufferedReader(isr);
-           	
-            //System.out.println(br.readLine());
-            
             OutputStream os = socket.getOutputStream();
             PrintStream out = new PrintStream(os,true,"UTF-8");
             Scanner kb = new Scanner(System.in);
-           
     		String userinput = "";
 	        while(!userinput.equals(" ")){
-                
                 System.out.print("Client> "); 
                 userinput = kb.nextLine();
-	        	
-                out.printf(userinput);
+                out.printf(userinput + "%n");
                 userinput = br.readLine();
-                
-                 if(!userinput.equals("exit"))
-                    System.out.println("Server>"+ userinput);
+                System.out.println("Server> " + userinput);
 	        }
-	
-        }
-
-        
+        } 
     }
 }
 
